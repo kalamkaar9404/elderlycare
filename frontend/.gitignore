@@ -1,0 +1,26 @@
+# ── Environment variables — NEVER commit real keys ───────────────────────────
+.env
+.env.local
+.env.*.local
+.env*.local
+*.env
+*.env.local
+
+# ── Next.js build output ──────────────────────────────────────────────────────
+.next/
+out/
+
+# ── Dependencies ──────────────────────────────────────────────────────────────
+node_modules/
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── v0 runtime files ──────────────────────────────────────────────────────────
+__v0_runtime_loader.js
+__v0_devtools.tsx
+__v0_jsx-dev-runtime.ts
+
+# ── TypeScript ────────────────────────────────────────────────────────────────
+*.tsbuildinfo

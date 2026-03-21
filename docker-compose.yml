@@ -1,0 +1,126 @@
+###############################################################################
+#  MedNutri — Docker Compose
+#  Orchestrates: Next.js frontend + MedGemma service + BioBERT NER service
+#
+#  Usage:
+#    docker compose up --build            # first run (builds images)
+#    docker compose up                    # subsequent runs
+#    docker compose up biobert medgemma  # AI services only (use with local npm)
+#    docker compose down                  # stop everything
+#    docker compose logs -f medgemma      # tail a specific service
+#
+#  URLs:
+#    Frontend  → http://localhost:3000
+#    MedGemma  → http://localhost:8100  (docs: /docs)
+#    BioBERT   → http://localhost:8200  (docs: /docs)
+###############################################################################
+
+services:
+
+  # ── Next.js Frontend ────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: mednutri-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules         # prevent host node_modules being mounted over
+      - /app/.next                # preserve .next build cache
+    environment:
+      - NODE_ENV=development
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - POLYGON_RPC_URL=${POLYGON_RPC_URL}
+      - ADMIN_PRIVATE_KEY=${ADMIN_PRIVATE_KEY}
+      - CONTRACT_ADDRESS=${CONTRACT_ADDRESS}
+      # AI Service URLs (internal Docker network)
+      - MEDGEMMA_SERVICE_URL=http://medgemma:8100
+      - BIOBERT_SERVICE_URL=http://biobert:8200
+    depends_on:
+      medgemma:
+        condition: service_healthy
+      biobert:
+        condition: service_healthy
+    networks:
+      - mednutri-net
+    restart: unless-stopped
+
+  # ── MedGemma Clinical AI Service ────────────────────────────────────────────
+  medgemma:
+    build:
+      context: ./services/medgemma
+      dockerfile: Dockerfile
+    container_name: mednutri-medgemma
+    ports:
+      - "8100:8100"
+    environment:
+      - MEDGEMMA_BACKEND=${MEDGEMMA_BACKEND:-openrouter}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - MEDGEMMA_MODEL=${MEDGEMMA_MODEL:-google/gemma-2-9b-it}
+      - VERTEX_ENDPOINT=${VERTEX_ENDPOINT:-}
+      - LOCAL_MODEL_NAME=${LOCAL_MODEL_NAME:-google/medgemma-4b-it}
+      - REQUEST_TIMEOUT=45
+      - MAX_NEW_TOKENS=512
+    volumes:
+      # Cache HuggingFace models outside container to avoid re-download
+      - hf-cache:/home/appuser/.cache/huggingface
+    networks:
+      - mednutri-net
+    restart: unless-stopped
+    # Allocate GPU if available (comment out if no GPU)
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  # ── BioBERT NER Service ──────────────────────────────────────────────────────
+  biobert:
+    build:
+      context: ./services/biobert
+      dockerfile: Dockerfile
+      args:
+        BIOBERT_MODEL: ${BIOBERT_MODEL:-d4data/biomedical-ner-all}
+    container_name: mednutri-biobert
+    ports:
+      - "8200:8200"
+    environment:
+      - BIOBERT_MODEL=${BIOBERT_MODEL:-d4data/biomedical-ner-all}
+      - DEVICE=cpu
+      - MAX_TOKEN_LENGTH=512
+      - BATCH_SIZE=8
+    volumes:
+      - hf-cache:/home/appuser/.cache/huggingface
+    networks:
+      - mednutri-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8200/health"]
+      interval: 30s
+      timeout: 15s
+      retries: 5
+      start_period: 120s    # BioBERT needs time to load model
+
+# ── Named Volumes ──────────────────────────────────────────────────────────────
+volumes:
+  hf-cache:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HF_CACHE_PATH:-./hf_model_cache}   # maps to a local dir
+
+# ── Network ────────────────────────────────────────────────────────────────────
+networks:
+  mednutri-net:
+    driver: bridge

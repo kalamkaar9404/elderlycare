@@ -1,0 +1,1146 @@
+@import 'tailwindcss';
+
+/* ── Design Token Palette: "Nurturing Health" (Elderly-Friendly) ───────────
+   Sage Green  #6B8E6F  — growth, NGO community
+   Soft Teal   #20B2AA  — medical trust, blockchain verified
+   Warm Peach  #E8B4A0  — pregnancy, empathy, warmth
+   Crimson     #DC2626  — urgent alerts
+   Amber       #F59E0B  — warnings, pending
+   
+   ELDERLY-FRIENDLY ENHANCEMENTS:
+   - Larger base font size (18px minimum)
+   - Higher contrast ratios (WCAG AAA compliant)
+   - Simplified color palette with clear distinctions
+   - Larger touch targets (minimum 44px)
+   - Reduced motion options
+──────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.1 0 0); /* Darker for better contrast */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.1 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.1 0 0);
+  --primary: oklch(0.15 0 0); /* Darker for better contrast */
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.95 0 0);
+  --secondary-foreground: oklch(0.15 0 0);
+  --muted: oklch(0.95 0 0);
+  --muted-foreground: oklch(0.4 0 0); /* Darker for readability */
+  --accent: oklch(0.95 0 0);
+  --accent-foreground: oklch(0.15 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.85 0 0); /* More visible borders */
+  --input: oklch(0.85 0 0);
+  --ring: oklch(0.5 0 0); /* More visible focus rings */
+  --radius: 0.75rem; /* Slightly larger for easier visibility */
+
+  /* Sidebar tokens */
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+
+  /* Chart tokens */
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+
+  /* ── Nurturing Health brand palette ─────────────────────────────────────── */
+  --nh-sage:          #6B8E6F;
+  --nh-sage-light:    #9CAF88;
+  --nh-sage-lightest: #F0F6E8;
+
+  --nh-teal:          #20B2AA;
+  --nh-teal-light:    #40CEC0;
+  --nh-teal-lightest: #E0F7F5;
+
+  --nh-peach:         #E8B4A0;
+  --nh-peach-light:   #F2CFC0;
+  --nh-peach-lightest:#FDF5F2;
+
+  --nh-crimson:       #DC2626;
+  --nh-amber:         #F59E0B;
+
+  /* Medical status */
+  --medical-safe:     var(--nh-teal);
+  --medical-attention:var(--nh-amber);
+  --medical-urgent:   var(--nh-crimson);
+  --medical-primary:  var(--nh-sage);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(1 0 0); /* Pure white for maximum contrast */
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(1 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(1 0 0);
+  --primary: oklch(1 0 0);
+  --primary-foreground: oklch(0.15 0 0);
+  --secondary: oklch(0.3 0 0);
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.3 0 0);
+  --muted-foreground: oklch(0.8 0 0); /* Lighter for better contrast */
+  --accent: oklch(0.3 0 0);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.4 0 0); /* More visible borders */
+  --input: oklch(0.4 0 0);
+  --ring: oklch(0.6 0 0); /* More visible focus rings */
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(1 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.3 0 0);
+  --sidebar-accent-foreground: oklch(1 0 0);
+  --sidebar-border: oklch(0.4 0 0);
+  --sidebar-ring: oklch(0.6 0 0);
+}
+
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-medical-safe: var(--medical-safe);
+  --color-medical-attention: var(--medical-attention);
+  --color-medical-urgent: var(--medical-urgent);
+  --color-medical-primary: var(--medical-primary);
+}
+
+/* ── Base layer ──────────────────────────────────────────────────────────── */
+@layer base {
+  * { @apply border-border outline-ring/50; }
+
+  body {
+    @apply bg-background text-foreground;
+    /* Nurturing Health mesh: sage mist + teal glow + warm peach blush */
+    background:
+      radial-gradient(ellipse 80% 60% at 10% 20%, rgba(107,142,111,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 80% at 90% 80%, rgba(32,178,170,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 70% 50% at 50% 110%, rgba(232,180,160,0.10) 0%, transparent 70%),
+      linear-gradient(160deg, #f0fdf4 0%, #f0f9ff 45%, #fff7f3 100%);
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Animated ambient mesh overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(600px at 15% 40%, rgba(107,142,111,0.06) 0%, transparent 100%),
+      radial-gradient(600px at 85% 70%, rgba(32,178,170,0.06) 0%, transparent 100%),
+      radial-gradient(400px at 50% 100%, rgba(232,180,160,0.08) 0%, transparent 100%);
+    animation: ambientMesh 18s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  @keyframes ambientMesh {
+    0%, 100% { transform: scale(1) translate(0,0); opacity: 1; }
+    33%       { transform: scale(1.05) translate(-1%, 1%); opacity: 0.85; }
+    66%       { transform: scale(0.98) translate(1%, -1%); opacity: 0.95; }
+  }
+}
+
+/* ── Utility layer ───────────────────────────────────────────────────────── */
+@layer utilities {
+
+  /* ── Glassmorphism Level 2: "Silk" cards ─────────────────────────────── */
+  .glass-silk {
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    background: rgba(255,255,255,0.78);
+    border: 1px solid rgba(255,255,255,0.30);
+    box-shadow:
+      0 8px 32px rgba(0,0,0,0.06),
+      inset 0 1px 0 rgba(255,255,255,0.60),
+      inset 0 -1px 0 rgba(0,0,0,0.03);
+  }
+
+  .glass-silk:hover {
+    background: rgba(255,255,255,0.85);
+    box-shadow:
+      0 16px 48px rgba(0,0,0,0.09),
+      inset 0 1px 0 rgba(255,255,255,0.80);
+    transition: all 0.25s ease;
+  }
+
+  /* Darker glass for sidebars / overlays */
+  .glass-dark {
+    backdrop-filter: blur(24px) saturate(160%);
+    background: rgba(15,30,25,0.82);
+    border: 1px solid rgba(255,255,255,0.10);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  }
+
+  /* ── Glow pulse (teal) — Doctor Approval button ──────────────────────── */
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(32,178,170,0.55), 0 4px 14px rgba(32,178,170,0.25); }
+    50%       { box-shadow: 0 0 20px 8px rgba(32,178,170,0.20), 0 4px 20px rgba(32,178,170,0.40); }
+  }
+  .glow-pulse-teal { animation: glowPulse 2.2s ease-in-out infinite; }
+
+  /* Sage variant */
+  @keyframes glowPulseSage {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(107,142,111,0.50); }
+    50%       { box-shadow: 0 0 18px 6px rgba(107,142,111,0.18); }
+  }
+  .glow-pulse-sage { animation: glowPulseSage 2.5s ease-in-out infinite; }
+
+  /* Crimson vignette — active when .critical-alert-active on body */
+  .critical-alert-active::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9998;
+    background: radial-gradient(ellipse at center, transparent 55%, rgba(220,38,38,0.07) 100%);
+    animation: crimsonBreathe 4s ease-in-out infinite;
+  }
+  @keyframes crimsonBreathe {
+    0%, 100% { opacity: 0.5; }
+    50%       { opacity: 1.0; }
+  }
+
+  /* ── Wave progress bar ───────────────────────────────────────────────── */
+  @keyframes waveProgress {
+    0%   { background-position: 0%   50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0%   50%; }
+  }
+  .progress-wave {
+    background-image: linear-gradient(
+      90deg,
+      #6B8E6F 0%,
+      #20B2AA 30%,
+      #E8B4A0 60%,
+      #20B2AA 80%,
+      #6B8E6F 100%
+    );
+    background-size: 200% 100%;
+    animation: waveProgress var(--wave-duration, 2s) ease-in-out infinite;
+  }
+
+  /* ── Chain-link spin (blockchain securing) ───────────────────────────── */
+  @keyframes chainSpin  { to { transform: rotate(360deg);  } }
+  @keyframes chainSpinR { to { transform: rotate(-360deg); } }
+  .chain-spin  { animation: chainSpin  1s linear infinite; }
+  .chain-spinr { animation: chainSpinR 1s linear infinite; }
+
+  /* ── Shimmer sweep ───────────────────────────────────────────────────── */
+  @keyframes shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position:  200% center; }
+  }
+  .shimmer-sweep {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 3.5s linear infinite;
+  }
+
+  /* ── Confetti particle ───────────────────────────────────────────────── */
+  @keyframes confettiFall {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(60px) rotate(360deg); opacity: 0; }
+  }
+
+  /* ── Medical pulse ───────────────────────────────────────────────────── */
+  @keyframes medicalPulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.5; }
+  }
+  .animate-medical-pulse { animation: medicalPulse 1.8s ease-in-out infinite; }
+
+  /* ── Breathing pulse (teal ring) ─────────────────────────────────────── */
+  @keyframes breathingPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(32,178,170,0.7); }
+    50%       { box-shadow: 0 0 0 10px rgba(32,178,170,0); }
+  }
+  .animate-breathing-pulse { animation: breathingPulse 2.2s ease-out infinite; }
+
+  /* ── Vital urgent pulse ──────────────────────────────────────────────── */
+  @keyframes vitalUrgent {
+    0%, 100% { border-color: rgba(220,38,38,1); box-shadow: 0 0 0 0 rgba(220,38,38,0.7); }
+    50%       { box-shadow: 0 0 0 5px rgba(220,38,38,0); }
+  }
+  .animate-vital-urgent { animation: vitalUrgent 2s ease-in-out infinite; }
+
+  /* ── Soft float ──────────────────────────────────────────────────────── */
+  @keyframes softFloat {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-5px); }
+  }
+  .animate-soft-float { animation: softFloat 3.5s ease-in-out infinite; }
+
+  /* ── Stagger fade-in helpers ─────────────────────────────────────────── */
+  @keyframes staggerIn {
+    from { opacity:0; transform:translateY(16px); }
+    to   { opacity:1; transform:translateY(0);    }
+  }
+  .animate-stagger-1 { animation: staggerIn 0.5s ease-out 0.05s both; }
+  .animate-stagger-2 { animation: staggerIn 0.5s ease-out 0.12s both; }
+  .animate-stagger-3 { animation: staggerIn 0.5s ease-out 0.20s both; }
+  .animate-stagger-4 { animation: staggerIn 0.5s ease-out 0.28s both; }
+  .animate-stagger-5 { animation: staggerIn 0.5s ease-out 0.36s both; }
+
+  /* ── Badge utilities ─────────────────────────────────────────────────── */
+  .badge-safe     { @apply bg-[#20B2AA]/10 text-[#20B2AA] border border-[#20B2AA]/30; }
+  .badge-attention{ @apply bg-[#F59E0B]/10 text-[#F59E0B] border border-[#F59E0B]/30; }
+  .badge-urgent   { @apply bg-[#DC2626]/10 text-[#DC2626] border border-[#DC2626]/30; }
+
+  /* ── Gradient text ───────────────────────────────────────────────────── */
+  .gradient-text-nurture {
+    background: linear-gradient(135deg, #6B8E6F 0%, #20B2AA 50%, #E8B4A0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── Transition helpers ──────────────────────────────────────────────── */
+  .transition-medical { @apply transition-all duration-300 ease-in-out; }
+  .hover-lift { @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl; }
+  .card-hover { @apply transition-all duration-250 hover:shadow-lg; }
+
+  /* ── Live indicator ──────────────────────────────────────────────────── */
+  @keyframes liveBlink {
+    0%, 49%, 100% { background-color: #DC2626; }
+    50%, 99%      { background-color: #DC2626; opacity: 0.45; }
+  }
+  .live-indicator { @apply w-2 h-2 rounded-full; animation: liveBlink 1s ease-in-out infinite; }
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ELDERLY-FRIENDLY UI ENHANCEMENTS
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Base Typography for Elderly Users ──────────────────────────────────── */
+body {
+  font-size: 1.125rem; /* 18px base */
+  line-height: 1.7; /* More breathing room */
+  letter-spacing: 0.01em; /* Slightly wider for readability */
+}
+
+h1 { font-size: 2.5rem; font-weight: 700; line-height: 1.3; } /* 40px */
+h2 { font-size: 2rem; font-weight: 600; line-height: 1.4; }   /* 32px */
+h3 { font-size: 1.5rem; font-weight: 600; line-height: 1.4; } /* 24px */
+h4 { font-size: 1.25rem; font-weight: 600; line-height: 1.5; } /* 20px */
+p  { font-size: 1.125rem; line-height: 1.7; } /* 18px */
+
+/* ── Larger Touch Targets (Minimum 44px) ────────────────────────────────── */
+button, 
+a[role="button"],
+[role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+/* Extra large buttons for primary actions */
+.btn-elderly-primary {
+  min-height: 56px;
+  padding: 1rem 2rem;
+  font-size: 1.25rem; /* 20px */
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-elderly-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ── High Contrast Focus Indicators ─────────────────────────────────────── */
+*:focus-visible {
+  outline: 4px solid var(--nh-teal);
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 4px solid var(--nh-teal);
+  outline-offset: 4px;
+}
+
+/* ── Larger Input Fields ────────────────────────────────────────────────── */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea,
+select {
+  min-height: 48px;
+  padding: 0.875rem 1rem;
+  font-size: 1.125rem; /* 18px */
+  border: 2px solid var(--border);
+  border-radius: 0.75rem;
+}
+
+input::placeholder,
+textarea::placeholder {
+  font-size: 1rem;
+  color: var(--muted-foreground);
+  opacity: 0.7;
+}
+
+/* ── Enhanced Card Styling ──────────────────────────────────────────────── */
+.elderly-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(107, 142, 111, 0.2);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.elderly-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-color: rgba(107, 142, 111, 0.4);
+}
+
+/* ── Simplified Navigation ──────────────────────────────────────────────── */
+.elderly-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  font-size: 1.25rem; /* 20px */
+  font-weight: 600;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.elderly-nav-item svg {
+  width: 32px;
+  height: 32px;
+  stroke-width: 2.5;
+}
+
+.elderly-nav-item:hover {
+  background: rgba(107, 142, 111, 0.15);
+  transform: translateX(4px);
+}
+
+.elderly-nav-item.active {
+  background: linear-gradient(135deg, #6B8E6F 0%, #20B2AA 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(107, 142, 111, 0.3);
+}
+
+/* ── Status Badges with Better Contrast ─────────────────────────────────── */
+.elderly-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 2rem;
+  border: 2px solid;
+}
+
+.elderly-badge-safe {
+  background: #E0F7F5;
+  color: #0D7A72;
+  border-color: #20B2AA;
+}
+
+.elderly-badge-attention {
+  background: #FEF3C7;
+  color: #92400E;
+  border-color: #F59E0B;
+}
+
+.elderly-badge-urgent {
+  background: #FEE2E2;
+  color: #991B1B;
+  border-color: #DC2626;
+}
+
+/* ── Reduced Motion for Accessibility ───────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── High Contrast Mode Support ─────────────────────────────────────────── */
+@media (prefers-contrast: high) {
+  :root {
+    --foreground: oklch(0 0 0); /* Pure black */
+    --border: oklch(0.3 0 0); /* Darker borders */
+  }
+  
+  button,
+  a {
+    border: 2px solid currentColor;
+  }
+}
+
+/* ── Larger Icons Throughout ────────────────────────────────────────────── */
+.elderly-icon-sm { width: 24px; height: 24px; }
+.elderly-icon-md { width: 32px; height: 32px; }
+.elderly-icon-lg { width: 40px; height: 40px; }
+.elderly-icon-xl { width: 48px; height: 48px; }
+
+/* ── Simplified Spacing System ──────────────────────────────────────────── */
+.elderly-spacing-xs { padding: 0.75rem; }
+.elderly-spacing-sm { padding: 1rem; }
+.elderly-spacing-md { padding: 1.5rem; }
+.elderly-spacing-lg { padding: 2rem; }
+.elderly-spacing-xl { padding: 3rem; }
+
+/* ── Clear Visual Hierarchy ─────────────────────────────────────────────── */
+.elderly-section {
+  margin-bottom: 2.5rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 1rem;
+  border: 2px solid rgba(107, 142, 111, 0.15);
+}
+
+.elderly-section-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #6B8E6F;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 3px solid #6B8E6F;
+}
+
+/* ── Tooltip Styling for Elderly Users ──────────────────────────────────── */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  white-space: nowrap;
+  z-index: 1000;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Loading States with Clear Feedback ─────────────────────────────────── */
+.elderly-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #6B8E6F;
+}
+
+.elderly-loading::before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(107, 142, 111, 0.2);
+  border-top-color: #6B8E6F;
+  border-radius: 50%;
+  animation: elderly-spin 1s linear infinite;
+}
+
+@keyframes elderly-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Error Messages with High Visibility ────────────────────────────────── */
+.elderly-error {
+  padding: 1.5rem;
+  background: #FEE2E2;
+  border: 3px solid #DC2626;
+  border-radius: 0.75rem;
+  color: #991B1B;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.elderly-success {
+  padding: 1.5rem;
+  background: #E0F7F5;
+  border: 3px solid #20B2AA;
+  border-radius: 0.75rem;
+  color: #0D7A72;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+/* ── Simplified Table Styling ───────────────────────────────────────────── */
+.elderly-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 1.125rem;
+}
+
+.elderly-table th {
+  padding: 1rem 1.5rem;
+  background: #6B8E6F;
+  color: white;
+  font-weight: 700;
+  text-align: left;
+  border-bottom: 3px solid #5A7A5E;
+}
+
+.elderly-table td {
+  padding: 1rem 1.5rem;
+  border-bottom: 2px solid rgba(107, 142, 111, 0.15);
+}
+
+.elderly-table tr:hover td {
+  background: rgba(107, 142, 111, 0.05);
+}
+
+/* ── Breadcrumb Navigation ──────────────────────────────────────────────── */
+.elderly-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+}
+
+.elderly-breadcrumb a {
+  color: #6B8E6F;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.elderly-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.elderly-breadcrumb-separator {
+  color: var(--muted-foreground);
+  font-weight: 700;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ELDERLY-FRIENDLY ANIMATIONS & DECORATIVE ELEMENTS
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Gentle Floating Animation ──────────────────────────────────────────── */
+@keyframes gentle-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes gentle-float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-gentle-float {
+  animation: gentle-float 4s ease-in-out infinite;
+}
+
+.animate-gentle-float-slow {
+  animation: gentle-float-slow 6s ease-in-out infinite;
+}
+
+/* ── Gentle Pulse Animation ─────────────────────────────────────────────── */
+@keyframes gentle-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.9; }
+}
+
+.animate-gentle-pulse {
+  animation: gentle-pulse 3s ease-in-out infinite;
+}
+
+/* ── Gentle Bounce Animation ────────────────────────────────────────────── */
+@keyframes gentle-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-gentle-bounce {
+  animation: gentle-bounce 2s ease-in-out infinite;
+}
+
+/* ── Gentle Sway Animation ──────────────────────────────────────────────── */
+@keyframes gentle-sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+.animate-gentle-sway {
+  animation: gentle-sway 4s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+/* ── Gentle Glow Animation ──────────────────────────────────────────────── */
+@keyframes gentle-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(107, 142, 111, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(107, 142, 111, 0.5); }
+}
+
+.animate-gentle-glow {
+  animation: gentle-glow 3s ease-in-out infinite;
+}
+
+/* ── Sparkle Animation ──────────────────────────────────────────────────── */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(180deg); }
+}
+
+.animate-sparkle {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* ── Wave Animation ─────────────────────────────────────────────────────── */
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  75% { transform: rotate(-15deg); }
+}
+
+.animate-wave {
+  animation: wave 2s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+/* ── Decorative Background Patterns ─────────────────────────────────────── */
+.elderly-bg-pattern {
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(107, 142, 111, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(32, 178, 170, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(232, 180, 160, 0.02) 0%, transparent 50%);
+}
+
+.elderly-bg-hearts {
+  background-image: 
+    url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 50 Q25 45 20 40 Q15 35 15 32 Q15 28 18 28 Q21 28 23 30 Q25 32 30 37 Q35 32 37 30 Q39 28 42 28 Q45 28 45 32 Q45 35 40 40 Q35 45 30 50' fill='%23FFB6C1' opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 60px 60px;
+}
+
+.elderly-bg-stars {
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 10 L42 30 L60 32 L42 34 L40 54 L38 34 L20 32 L38 30 Z' fill='%23FFD700' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 80px 80px;
+}
+
+/* ── Welcome Banner with Illustration ───────────────────────────────────── */
+.elderly-welcome-banner {
+  position: relative;
+  background: linear-gradient(135deg, #6B8E6F 0%, #20B2AA 100%);
+  border-radius: 1.5rem;
+  padding: 3rem;
+  color: white;
+  overflow: hidden;
+}
+
+.elderly-welcome-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: gentle-float-slow 8s ease-in-out infinite;
+}
+
+/* ── Success Celebration Elements ───────────────────────────────────────── */
+.elderly-success-confetti {
+  position: relative;
+}
+
+.elderly-success-confetti::after {
+  content: '✨';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 1.5rem;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* ── Friendly Tooltip with Character ────────────────────────────────────── */
+.elderly-tooltip {
+  position: relative;
+  background: white;
+  border: 2px solid #6B8E6F;
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.elderly-tooltip::before {
+  content: '💚';
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  animation: gentle-pulse 2s ease-in-out infinite;
+}
+
+/* ── Animated Health Icons ──────────────────────────────────────────────── */
+.health-icon-pulse {
+  display: inline-block;
+  animation: gentle-pulse 2s ease-in-out infinite;
+}
+
+.health-icon-bounce {
+  display: inline-block;
+  animation: gentle-bounce 2s ease-in-out infinite;
+}
+
+/* ── Friendly Empty State ───────────────────────────────────────────────── */
+.elderly-empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, rgba(107, 142, 111, 0.05) 0%, rgba(32, 178, 170, 0.05) 100%);
+  border-radius: 1.5rem;
+  border: 2px dashed rgba(107, 142, 111, 0.3);
+}
+
+.elderly-empty-state::before {
+  content: '👋';
+  display: block;
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: wave 2s ease-in-out infinite;
+}
+
+/* ── Decorative Corner Elements ─────────────────────────────────────────── */
+.elderly-corner-decoration {
+  position: relative;
+}
+
+.elderly-corner-decoration::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  border-radius: 50%;
+  opacity: 0.2;
+  animation: gentle-pulse 3s ease-in-out infinite;
+}
+
+/* ── Friendly Progress Indicator ────────────────────────────────────────── */
+.elderly-progress-wrapper {
+  position: relative;
+  padding: 1rem;
+}
+
+.elderly-progress-character {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  animation: gentle-float 3s ease-in-out infinite;
+}
+
+/* ── Warm Welcome Message ───────────────────────────────────────────────── */
+.elderly-welcome-message {
+  background: linear-gradient(135deg, rgba(255, 182, 193, 0.2) 0%, rgba(255, 218, 185, 0.2) 100%);
+  border-left: 6px solid #FFB6C1;
+  padding: 2rem;
+  border-radius: 1rem;
+  position: relative;
+}
+
+.elderly-welcome-message::before {
+  content: '🌟';
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+/* ── Animated Checkmark ─────────────────────────────────────────────────── */
+@keyframes checkmark-draw {
+  0% { stroke-dashoffset: 100; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.elderly-checkmark {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: checkmark-draw 0.8s ease-out forwards;
+}
+
+/* ── Friendly Loading State ─────────────────────────────────────────────── */
+.elderly-loading-friendly {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 3rem;
+}
+
+.elderly-loading-friendly::before {
+  content: '⏳';
+  font-size: 3rem;
+  animation: gentle-sway 2s ease-in-out infinite;
+}
+
+/* ── Celebration Animation ──────────────────────────────────────────────── */
+@keyframes celebrate {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(-5deg); }
+  75% { transform: scale(1.1) rotate(5deg); }
+}
+
+.elderly-celebrate {
+  animation: celebrate 0.6s ease-in-out;
+}
+
+/* ── Gentle Attention Grabber ───────────────────────────────────────────── */
+.elderly-attention {
+  position: relative;
+  animation: gentle-pulse 2s ease-in-out infinite;
+}
+
+.elderly-attention::after {
+  content: '👉';
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  animation: gentle-bounce 1.5s ease-in-out infinite;
+}
+
+/* ── Friendly Hover Effects ─────────────────────────────────────────────── */
+.elderly-hover-lift {
+  transition: all 0.3s ease;
+}
+
+.elderly-hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(107, 142, 111, 0.2);
+}
+
+.elderly-hover-glow {
+  transition: all 0.3s ease;
+}
+
+.elderly-hover-glow:hover {
+  box-shadow: 0 0 30px rgba(107, 142, 111, 0.4);
+}
+
+/* ── Reduce animations for users who prefer reduced motion ──────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-gentle-float,
+  .animate-gentle-float-slow,
+  .animate-gentle-pulse,
+  .animate-gentle-bounce,
+  .animate-gentle-sway,
+  .animate-gentle-glow,
+  .animate-sparkle,
+  .animate-wave,
+  .health-icon-pulse,
+  .health-icon-bounce,
+  .elderly-attention,
+  .elderly-loading-friendly::before,
+  .elderly-welcome-message::before,
+  .elderly-tooltip::before {
+    animation: none !important;
+  }
+  
+  .elderly-hover-lift:hover,
+  .elderly-hover-glow:hover {
+    transform: none !important;
+  }
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SUBTLE ICON ANIMATIONS FOR ELDERLY-FRIENDLY UI
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Gentle icon pulse for health/heart icons ───────────────────────────── */
+.icon-health-pulse {
+  animation: gentle-pulse 2s ease-in-out infinite;
+}
+
+/* ── Gentle float for decorative icons ──────────────────────────────────── */
+.icon-float {
+  animation: gentle-float 3s ease-in-out infinite;
+}
+
+/* ── Subtle glow for verified/success icons ─────────────────────────────── */
+.icon-verified-glow {
+  filter: drop-shadow(0 0 8px rgba(32, 178, 170, 0.4));
+  animation: gentle-pulse 3s ease-in-out infinite;
+}
+
+/* ── Attention pulse for alert icons ────────────────────────────────────── */
+.icon-alert-pulse {
+  animation: gentle-pulse 1.5s ease-in-out infinite;
+}
+
+/* ── Gentle rotate for loading/activity icons ───────────────────────────── */
+@keyframes gentle-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.icon-activity-spin {
+  animation: gentle-rotate 4s linear infinite;
+}
+
+/* ── Heartbeat animation for heart icons ────────────────────────────────── */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  10% { transform: scale(1.1); }
+  20% { transform: scale(1); }
+  30% { transform: scale(1.15); }
+  40% { transform: scale(1); }
+}
+
+.icon-heartbeat {
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+/* ── Gentle bounce for success icons ────────────────────────────────────── */
+.icon-success-bounce {
+  animation: gentle-bounce 2s ease-in-out infinite;
+}
+
+/* ── Apply to specific Lucide icons automatically ───────────────────────── */
+/* Heart icons get heartbeat */
+[data-lucide="heart"],
+.lucide-heart {
+  animation: heartbeat 2.5s ease-in-out infinite;
+}
+
+/* Activity/pulse icons get gentle pulse */
+[data-lucide="activity"],
+.lucide-activity {
+  animation: gentle-pulse 2s ease-in-out infinite;
+}
+
+/* Shield icons get verified glow */
+[data-lucide="shield-check"],
+.lucide-shield-check {
+  filter: drop-shadow(0 0 6px rgba(32, 178, 170, 0.3));
+}
+
+/* Alert icons get attention pulse */
+[data-lucide="alert-triangle"],
+.lucide-alert-triangle {
+  animation: gentle-pulse 1.8s ease-in-out infinite;
+}
+
+/* Sparkles get sparkle animation */
+[data-lucide="sparkles"],
+.lucide-sparkles {
+  animation: sparkle 2.5s ease-in-out infinite;
+}
+
+/* ── Hover effects for interactive icons ────────────────────────────────── */
+button:hover [data-lucide],
+button:hover .lucide,
+a:hover [data-lucide],
+a:hover .lucide {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+/* ── Disable icon animations for reduced motion ─────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  [data-lucide],
+  .lucide,
+  .lucide-heart,
+  .lucide-activity,
+  .lucide-shield-check,
+  .lucide-alert-triangle,
+  .lucide-sparkles,
+  .icon-health-pulse,
+  .icon-float,
+  .icon-verified-glow,
+  .icon-alert-pulse,
+  .icon-activity-spin,
+  .icon-heartbeat,
+  .icon-success-bounce {
+    animation: none !important;
+    filter: none !important;
+  }
+  
+  button:hover [data-lucide],
+  button:hover .lucide,
+  a:hover [data-lucide],
+  a:hover .lucide {
+    transform: none !important;
+  }
+}

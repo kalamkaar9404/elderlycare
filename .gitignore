@@ -1,0 +1,144 @@
+# ═══════════════════════════════════════════════════════════════
+#  Dr. NutriCare — .gitignore
+#  NEVER commit real keys, compiled artifacts, or scratch scripts
+# ═══════════════════════════════════════════════════════════════
+
+# ── Environment variables — NEVER commit real keys ────────────
+.env
+.env.local
+.env.*.local
+*.env.local
+frontend/.env.local
+frontend/.env*.local
+backend/.env
+backend/.env.local
+.env.docker
+
+# ── Hardhat / Solidity compiled output ────────────────────────
+artifacts/
+cache/
+typechain-types/
+*.tsbuildinfo
+
+# ── Node / Next.js ────────────────────────────────────────────
+node_modules/
+frontend/node_modules/
+.next/
+out/
+frontend/.next/
+frontend/out/
+*.tsbuildinfo
+frontend/next-env.d.ts
+
+# ── Python scratch / fix / audit scripts ─────────────────────
+# (one-off scripts created during development — not needed in repo)
+75her_videos.py
+_tmp_read.py
+audit.py
+audit_console.py
+check*.py
+chk*.py
+checkdeps.mjs
+check_wallet.mjs
+dedup_imports.py
+ethers_ver.py
+find_more.py
+find_real_nutrition.py
+find_videos.py
+find_videotile.py
+fix_exports.py
+fix_imports.py
+fix_render.py
+fix_scan_btn.py
+fix_scan_btn2.py
+fixalert.py
+fixalert2.py
+fixalert3.py
+fixalert4.py
+fixalert5.py
+fixaq.py
+fixaq2.py
+fixaq3.py
+fixaq4.py
+fixcode.py
+fixfinal.py
+fixfinal2.py
+fixsidebar.py
+fixsidebar2.py
+getpython.py
+inspectPlugin.mjs
+checkConnection.mjs
+checkConfig.mjs
+checkPluginLoad.mjs
+oembed_batch.py
+read_files.js
+read_files.py
+read_four_files.py
+read_targets.py
+read_targets2.py
+readmockmeals.py
+readoverview.py
+replace_videotile.py
+runtsc.py
+runtsc2.py
+scan_project.py
+scanbuttons.py
+scanfix.py
+show_videotile.py
+show_videotile2.py
+test_api.py
+test_known_good.py
+test_yt.py
+update_recipe_videos.py
+update_videos.py
+update_videos2.py
+verify_ai.py
+verify_confirmed.py
+verify_final.py
+verify_ids.py
+verify_ids2.py
+verify_ids3.py
+verify_nutrition.py
+verify_thumbs.py
+verify_thumbs2.py
+verifychanges.py
+vfix.py
+
+# ── Python general ────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# ── Virtual environments ──────────────────────────────────────
+venv/
+.venv/
+env/
+
+# ── Streamlit ─────────────────────────────────────────────────
+.streamlit/secrets.toml
+
+# ── OS ────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+
+# ── Editor ────────────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ── Hardhat misc ──────────────────────────────────────────────
+scripts/checkBalance.mjs
+scripts/inspectPlugin.mjs
+scripts/checkConnection.mjs
+scripts/checkConfig.mjs
+scripts/checkPluginLoad.mjs
