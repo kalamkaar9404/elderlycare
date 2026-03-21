@@ -3,8 +3,6 @@
 > Advanced healthcare platform leveraging Large Language Models, Computer Vision, Predictive Analytics, and Blockchain for comprehensive elderly care management.
 
 ![MedNutri](https://img.shields.io/badge/MedNutri-Elderly%20Care-6B8E6F?style=for-the-badge)
-![AI Powered](https://img.shields.io/badge/AI-Gemini%202.0-4285F4?style=for-the-badge)
-![Blockchain](https://img.shields.io/badge/Blockchain-Polygon%20Amoy-8247E5?style=for-the-badge)
 
 ## Overview
 
@@ -72,17 +70,6 @@ const response = await fetch('https://generativelanguage.googleapis.com/v1beta/m
   })
 });
 ```
-
-**OpenAI GPT Integration - Nutritionist Chat**
-
-Secondary LLM integration for specialized nutrition counseling.
-
-**Implementation:**
-- **Model**: gpt-4-turbo-preview
-- **Purpose**: Personalized meal planning and nutrition advice
-- **Context**: Patient vitals, dietary restrictions, chronic conditions
-
----
 
 ### 2. Natural Language Processing (NLP)
 
@@ -785,63 +772,8 @@ We welcome contributions that improve AI capabilities and elderly care features!
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
----
 
-## Acknowledgments
 
-- Google for Gemini 2.0 API access
-- OpenAI for GPT-4 integration
-- Polygon team for blockchain infrastructure
-- Medical professionals for domain expertise
-- Open source ML community
-
----
-
-## Support
-
-### For Elderly Users
-- **Email**: support@mednutri.care
-- **Phone**: 1-800-MEDNUTRI (24/7 support)
-- **Video Tutorials**: Available at mednutri.care/tutorials
-
-### For Developers
-- **GitHub Issues**: Report bugs and request features
-- **Documentation**: Full API docs at docs.mednutri.care
-- **Discord**: Join our developer community
-
----
-
-## Roadmap
-
-### Q1 2025
-- Voice interface with speech processing
-- Enhanced predictive models
-- Mobile app with offline AI
-- Wearable device integration
-
-### Q2 2025
-- Federated learning for privacy-preserving ML
-- Multi-modal AI (text + image + voice)
-- Real-time video consultation with AI assistance
-- Advanced recommendation algorithms
-
-### Q3 2025
-- Explainable AI (XAI) for model transparency
-- Automated clinical trial matching
-- AI-powered medication optimization
-- Telemedicine integration
-
----
-
-## Impact Metrics
-
-- **10,000+** Elderly patients served
-- **50,000+** Medical documents processed with AI
-- **1M+** AI health assistant interactions
-- **99.9%** Document verification accuracy
-- **94%** Patient satisfaction with AI recommendations
-
----
 
 <div align="center">
 
