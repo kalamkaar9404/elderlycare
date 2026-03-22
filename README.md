@@ -6,7 +6,7 @@
 
 ## Overview
 
-MedNutri is an advanced elderly care platform that integrates cutting-edge artificial intelligence, machine learning, and blockchain technology to provide comprehensive health monitoring, personalized nutrition guidance, and secure medical record management for senior citizens.
+MedNutri is an advanced elderly care platform that integrates cutting-edge natural language processing (NLP),machine learning, and blockchain technology to provide comprehensive health monitoring, personalized nutrition guidance, and secure medical record management for senior citizens.
 
 ## Why Elderly Care?
 
@@ -17,61 +17,12 @@ As our population ages, elderly adults face unique healthcare challenges:
 - Document security and fraud prevention
 - Need for accessible, easy-to-use interfaces
 
-MedNutri addresses each challenge through AI-driven solutions and secure data management.
+MedNutri addresses each challenge through NLP-driven solutions and secure data management.
 
 ---
 
 ## AI & Machine Learning Technologies
-
-### 1. Large Language Models (LLMs)
-
-**Google Gemini 2.0 Flash - Conversational Health Assistant**
-
-MedNutri leverages Google's latest Gemini 2.0 Flash model to provide intelligent, context-aware health guidance for elderly patients.
-
-**Implementation:**
-- **Model**: google/gemini-2.0-flash-exp:free
-- **Context Window**: 1M tokens for comprehensive medical history analysis
-- **Temperature**: 0.7 for balanced creativity and accuracy
-- **Streaming**: Real-time response generation
-
-**Capabilities:**
-- Natural language understanding of health queries
-- Context-aware responses based on patient vitals and medical history
-- Medication interaction analysis
-- Symptom assessment and triage recommendations
-- Dietary guidance based on chronic conditions
-- Multi-turn conversations with memory retention
-
-**Use Cases:**
-```
-Patient: "What should my blood glucose level be?"
-AI: Analyzes patient's age (72), diabetes status, current readings (7.2 mmol/L),
-    and provides personalized guidance with normal ranges for elderly diabetics.
-
-Patient: "Are there foods I should avoid for heart health?"
-AI: Reviews patient's cardiovascular history, current medications, and generates
-    a personalized list of foods to avoid/include based on their specific conditions.
-```
-
-**Technical Integration:**
-```typescript
-// API Route: /api/chat/maternal (adapted for elderly care)
-const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    contents: conversationHistory,
-    systemInstruction: elderlyHealthContext,
-    generationConfig: {
-      temperature: 0.7,
-      maxOutputTokens: 2048
-    }
-  })
-});
-```
-
-### 2. Natural Language Processing (NLP)
+### 1.Natural Language Processing (NLP)
 
 **Medical Named Entity Recognition (NER)**
 
@@ -128,6 +79,54 @@ Specialized biomedical language model for medical text understanding.
 - Medical question answering
 
 ---
+
+### 2. Large Language Models (LLMs)
+
+**Google Gemini 2.0 Flash - Conversational Health Assistant**
+
+MedNutri leverages Google's latest Gemini 2.0 Flash model to provide intelligent, context-aware health guidance for elderly patients.
+
+**Implementation:**
+- **Model**: google/gemini-2.0-flash-exp:free
+- **Context Window**: 1M tokens for comprehensive medical history analysis
+- **Temperature**: 0.7 for balanced creativity and accuracy
+- **Streaming**: Real-time response generation
+
+**Capabilities:**
+- Natural language understanding of health queries
+- Context-aware responses based on patient vitals and medical history
+- Medication interaction analysis
+- Symptom assessment and triage recommendations
+- Dietary guidance based on chronic conditions
+- Multi-turn conversations with memory retention
+
+**Use Cases:**
+```
+Patient: "What should my blood glucose level be?"
+AI: Analyzes patient's age (72), diabetes status, current readings (7.2 mmol/L),
+    and provides personalized guidance with normal ranges for elderly diabetics.
+
+Patient: "Are there foods I should avoid for heart health?"
+AI: Reviews patient's cardiovascular history, current medications, and generates
+    a personalized list of foods to avoid/include based on their specific conditions.
+```
+
+**Technical Integration:**
+```typescript
+// API Route: /api/chat/maternal (adapted for elderly care)
+const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    contents: conversationHistory,
+    systemInstruction: elderlyHealthContext,
+    generationConfig: {
+      temperature: 0.7,
+      maxOutputTokens: 2048
+    }
+  })
+});
+```
 
 ### 3. Generative AI
 
