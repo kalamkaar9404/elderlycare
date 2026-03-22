@@ -1,4 +1,4 @@
-# MedNutri - AI-Powered Elderly Care Platform
+# MedNutri - NLP-Powered Elderly Care Platform
 
 > Advanced healthcare platform leveraging Large Language Models, Computer Vision, Predictive Analytics, and Blockchain for comprehensive elderly care management.
 
